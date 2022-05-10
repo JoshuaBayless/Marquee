@@ -20,7 +20,7 @@ class TableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionView
     
     var delegate: collectionViewDelegate?
     
-    let viewController = ViewController()
+    weak var viewController = ViewController()
     
     var movies: [Movie]? {
         didSet {
@@ -83,14 +83,14 @@ class TableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionView
         case 1:
             if let posterPath = tvShows?[indexPath.row].poster_path {
                 let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") ?? URL(string: "https://image.tmdb.org/t/p/w500/jrgifaYeUtTnaH7NF5Drkgjg2MB.jpg")
-                cell.poster.kf.setImage(with: url)}
+                let processor = RoundCornerImageProcessor(cornerRadius: 20)
+                cell.poster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])}
         default:
             if let posterPath = movies?[indexPath.row].poster_path {
                 let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") ?? URL(string: "https://image.tmdb.org/t/p/w500/jrgifaYeUtTnaH7NF5Drkgjg2MB.jpg")
-                cell.poster.kf.setImage(with: url)}
+                let processor = RoundCornerImageProcessor(cornerRadius: 20)
+                cell.poster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])}
         }
-        
-        
         return cell
     }
     

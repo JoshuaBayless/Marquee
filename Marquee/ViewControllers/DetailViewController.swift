@@ -7,6 +7,7 @@
 
 import UIKit
 import AVKit
+import Kingfisher
 
 class DetailViewController: UIViewController {
     
@@ -33,7 +34,9 @@ class DetailViewController: UIViewController {
         releaseDate.text = selectedContent.release_date
         
         let url = URL(string: "https://image.tmdb.org/t/p/w500/\(selectedContent.poster_path)")
-        mainPoster.kf.setImage(with: url)
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        mainPoster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])
+        
         
         profilePicSetUp()
         favoritesButtonSetup(for: selectedContent)

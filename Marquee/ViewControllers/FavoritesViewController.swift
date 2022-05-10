@@ -56,7 +56,8 @@ class FavoritesViewController: UIViewController, UICollectionViewDelegate, UICol
         let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
         
         let url = URL(string: "https://image.tmdb.org/t/p/w500/\(FavoritesList.shared.list[indexPath.row].poster_path!)")
-        cell.poster.kf.setImage(with: url)
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        cell.poster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])
         return cell
         
     }
