@@ -45,7 +45,6 @@ struct JSONManager {
                 if let safeData = data {
                     if let movieData = self.parseJSON(safeData) as T? {
                         completion(.success(movieData))
-                        
                     }}
             }
             task.resume()
@@ -54,11 +53,10 @@ struct JSONManager {
     
     func parseJSON<T:Decodable>(_ movieData: Data) -> T? {
         let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         do {
             let decodedData = try decoder.decode(T.self, from: movieData)
             return decodedData
-            
-            
         } catch {
             print(error)
             return nil

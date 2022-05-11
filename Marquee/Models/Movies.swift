@@ -12,10 +12,10 @@ struct Movies: Decodable {
 }
 
 struct Movie: Decodable {
-    var original_title: String
+    var originalTitle: String
     var overview: String
-    var poster_path: String?
-    var release_date: String
+    var posterPath: String?
+    var releaseDate: String
     var title: String
-    var vote_average: Double
+    var voteAverage: Double
 }
