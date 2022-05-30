@@ -13,7 +13,7 @@ class FavoritesList {
     
     static let shared = FavoritesList()
     
-    var list: [Favorites] = []
+    var list = [Favorites]()
     
 }
 

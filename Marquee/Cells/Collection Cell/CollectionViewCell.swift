@@ -12,7 +12,6 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var poster: UIImageView!
     @IBOutlet weak var animationView: UIView!
     
-    
     static let identifier = "CollectionViewCell"
     
     static func nib() -> UINib{
@@ -22,10 +21,9 @@ class CollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
     
     override func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-
+        
         coordinator.addCoordinatedAnimations({
             if self.isFocused {
                 self.gradientAnimation()
@@ -38,8 +36,6 @@ class CollectionViewCell: UICollectionViewCell {
                 self.poster.layer.mask = nil
             }
         }, completion: nil)
-        
-    
     }
     
     func gradientAnimation() {
@@ -65,6 +61,4 @@ class CollectionViewCell: UICollectionViewCell {
         })
     }
 }
-
-
 

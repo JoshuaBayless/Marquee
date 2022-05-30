@@ -89,5 +89,4 @@ fastlane/test_output
 
 iOSInjectionProject/
 *.xcuserstate
-Marquee.xcodeproj/project.xcworkspace/xcuserdata/DarthBayless.xcuserdatad/UserInterfaceState.xcuserstate
-*.xcuserstate
+

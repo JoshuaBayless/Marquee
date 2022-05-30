@@ -13,9 +13,9 @@ struct TVShows: Decodable {
 }
 
 struct TVdata: Decodable {
-    var first_air_date: String
+    var firstAirDate: String
     var name: String
     var overview: String
-    var poster_path: String?
-    var vote_average: Double
+    var posterPath: String
+    var voteAverage: Double
 }
