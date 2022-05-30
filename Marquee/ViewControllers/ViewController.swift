@@ -105,6 +105,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource, CollectionV
                 self.movies = movieData.results
             case let .failure(error):
                 print(error)
+                    
             }
         }
     }

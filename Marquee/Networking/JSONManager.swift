@@ -45,7 +45,8 @@ struct JSONManager {
                 if let safeData = data {
                     if let movieData = self.parseJSON(safeData) as T? {
                         completion(.success(movieData))
-                    }}
+                    }
+                }
             }
             task.resume()
         }

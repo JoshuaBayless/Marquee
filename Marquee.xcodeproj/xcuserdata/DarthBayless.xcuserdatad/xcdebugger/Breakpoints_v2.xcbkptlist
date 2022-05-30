@@ -238,8 +238,8 @@
             filePath = "Marquee/ViewControllers/ViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "updateFavorite(at:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -16,6 +16,6 @@ struct TVdata: Decodable {
     var firstAirDate: String
     var name: String
     var overview: String
-    var posterPath: String?
+    var posterPath: String
     var voteAverage: Double
 }

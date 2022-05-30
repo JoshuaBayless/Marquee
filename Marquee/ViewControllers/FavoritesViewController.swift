@@ -47,8 +47,10 @@ class FavoritesViewController: UIViewController, UICollectionViewDelegate, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = favoritesCollectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
-        let url = URL(string: "https://image.tmdb.org/t/p/w500/\(FavoritesList.shared.list[indexPath.row].posterPath!)")
-        cell.poster.kf.setImage(with: url)
+        if let posterPath = FavoritesList.shared.list[indexPath.row].posterPath {
+            let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)")
+            cell.poster.kf.setImage(with: url)
+        }
         return cell
     }
     
@@ -57,10 +59,10 @@ class FavoritesViewController: UIViewController, UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let selectedItem = Content(overview: FavoritesList.shared.list[indexPath.row].overview!,
-                                   posterPath: FavoritesList.shared.list[indexPath.row].posterPath!,
-                                   releaseDate: FavoritesList.shared.list[indexPath.row].releaseDate!,
-                                   title: FavoritesList.shared.list[indexPath.row].title!,
+        let selectedItem = Content(overview: FavoritesList.shared.list[indexPath.row].overview ?? "",
+                                   posterPath: FavoritesList.shared.list[indexPath.row].posterPath ?? "",
+                                   releaseDate: FavoritesList.shared.list[indexPath.row].releaseDate ?? "",
+                                   title: FavoritesList.shared.list[indexPath.row].title ?? "",
                                    voteAverage: FavoritesList.shared.list[indexPath.row].voteAverage)
         didSelectItem(selectedItem)
     }

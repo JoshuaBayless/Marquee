@@ -69,8 +69,9 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
         if let posterPath = searchData?[indexPath.row].posterPath {
-            let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") ?? URL(string: "https://image.tmdb.org/t/p/w500/jrgifaYeUtTnaH7NF5Drkgjg2MB.jpg")
-            cell.poster.kf.setImage(with: url)}
+            let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)")
+            cell.poster.kf.setImage(with: url)
+        }
         return cell
     }
     
@@ -78,11 +79,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let title = searchData?[indexPath.row].title ?? searchData?[indexPath.row].name
         let releaseDate = searchData?[indexPath.row].firstAirDate ?? searchData?[indexPath.row].releaseDate
         
-        let selectedItem = Content(overview: (searchData?[indexPath.row].overview)!,
-                                   posterPath: (searchData?[indexPath.row].posterPath)!,
-                                   releaseDate: releaseDate!,
-                                   title: title!,
-                                   voteAverage: (searchData?[indexPath.row].voteAverage)!)
+        let selectedItem = Content(overview: (searchData?[indexPath.row].overview) ?? "",
+                                   posterPath: (searchData?[indexPath.row].posterPath) ?? "",
+                                   releaseDate: releaseDate ?? "",
+                                   title: title ?? "",
+                                   voteAverage: (searchData?[indexPath.row].voteAverage) ?? 0)
         didSelectItem(selectedItem)
         print(selectedItem)
     }
