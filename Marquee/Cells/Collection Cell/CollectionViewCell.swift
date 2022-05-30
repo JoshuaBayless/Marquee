@@ -10,7 +10,6 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var poster: UIImageView!
-    @IBOutlet weak var poster2: UIImageView!
     @IBOutlet weak var animationView: UIView!
     
     
