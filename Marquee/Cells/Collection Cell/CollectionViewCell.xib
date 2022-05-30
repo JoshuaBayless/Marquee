@@ -16,9 +16,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="187" height="282"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goonies" translatesAutoresizingMaskIntoConstraints="NO" id="aOb-SB-ONC" userLabel="Poster2">
-                        <rect key="frame" x="7.5" y="-371" width="172" height="1024"/>
-                    </imageView>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="goonies" translatesAutoresizingMaskIntoConstraints="NO" id="cQU-7O-OSQ">
                         <rect key="frame" x="7.5" y="-371" width="172" height="1024"/>
                     </imageView>
@@ -30,20 +27,16 @@
             <viewLayoutGuide key="safeArea" id="7PP-Ag-gPX"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="eNh-XY-St3" secondAttribute="trailing" constant="7.5" id="AIX-Ga-cdN"/>
-                <constraint firstItem="aOb-SB-ONC" firstAttribute="centerX" secondItem="Rz2-K0-ksD" secondAttribute="centerX" id="IWt-WY-a1n"/>
                 <constraint firstItem="eNh-XY-St3" firstAttribute="centerY" secondItem="Rz2-K0-ksD" secondAttribute="centerY" id="Mbw-wq-aZC"/>
                 <constraint firstItem="cQU-7O-OSQ" firstAttribute="centerY" secondItem="Rz2-K0-ksD" secondAttribute="centerY" id="NHh-bA-rnQ"/>
                 <constraint firstAttribute="trailing" secondItem="cQU-7O-OSQ" secondAttribute="trailing" constant="7.5" id="SeV-oX-ZFN"/>
-                <constraint firstItem="aOb-SB-ONC" firstAttribute="centerY" secondItem="Rz2-K0-ksD" secondAttribute="centerY" id="gIA-vO-ePa"/>
                 <constraint firstItem="eNh-XY-St3" firstAttribute="centerX" secondItem="Rz2-K0-ksD" secondAttribute="centerX" id="mn7-bM-Mvv"/>
                 <constraint firstItem="cQU-7O-OSQ" firstAttribute="centerX" secondItem="Rz2-K0-ksD" secondAttribute="centerX" id="q3L-O4-8D4"/>
-                <constraint firstAttribute="trailing" secondItem="aOb-SB-ONC" secondAttribute="trailing" constant="7.5" id="xj1-ra-5Qe"/>
             </constraints>
             <size key="customSize" width="187" height="282"/>
             <connections>
                 <outlet property="animationView" destination="eNh-XY-St3" id="xQO-tn-DP9"/>
                 <outlet property="poster" destination="cQU-7O-OSQ" id="1P1-ug-eKS"/>
-                <outlet property="poster2" destination="aOb-SB-ONC" id="hTG-EO-QWr"/>
             </connections>
             <point key="canvasLocation" x="234.5" y="73"/>
         </collectionViewCell>
