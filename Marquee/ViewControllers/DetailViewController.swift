@@ -7,6 +7,7 @@
 
 import UIKit
 import AVKit
+import Kingfisher
 
 class DetailViewController: UIViewController {
     
@@ -29,9 +30,12 @@ class DetailViewController: UIViewController {
         scoreBar.progress = Float(selectedContent.voteAverage*0.1)
         contentTitle.text = selectedContent.title
         contentOverview.text = selectedContent.overview
+
         releaseDate.text = selectedContent.releaseDate
         let url = URL(string: "https://image.tmdb.org/t/p/w500/\(selectedContent.posterPath)")
-        mainPoster.kf.setImage(with: url)
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        mainPoster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])
+
         profilePicSetUp()
         favoritesButtonSetup(for: selectedContent)
     }

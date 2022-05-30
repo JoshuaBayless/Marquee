@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SearchViewController: UIViewController {
     
@@ -68,9 +69,10 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
         if let posterPath = searchData?[indexPath.row].posterPath {
             let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)")
-            cell.poster.kf.setImage(with: url)
+            cell.poster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])
         }
         return cell
     }

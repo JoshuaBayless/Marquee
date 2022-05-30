@@ -18,7 +18,7 @@ class TableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionView
     static let identifier = "TableViewCell"
     var delegate: CollectionViewDelegate?
     let viewController = ViewController()
-    
+
     var movies: [Movie]? {
         didSet {
             collectionView.reloadData()
@@ -74,11 +74,13 @@ class TableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionView
         case 1:
             if let posterPath = tvShows?[indexPath.row].posterPath {
                 let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") ?? URL(string: "https://image.tmdb.org/t/p/w500/jrgifaYeUtTnaH7NF5Drkgjg2MB.jpg")
-                cell.poster.kf.setImage(with: url)}
+                let processor = RoundCornerImageProcessor(cornerRadius: 20)
+                cell.poster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])}
         default:
             if let posterPath = movies?[indexPath.row].posterPath {
                 let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)") ?? URL(string: "https://image.tmdb.org/t/p/w500/jrgifaYeUtTnaH7NF5Drkgjg2MB.jpg")
-                cell.poster.kf.setImage(with: url)}
+                let processor = RoundCornerImageProcessor(cornerRadius: 20)
+                cell.poster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])}
         }
         return cell
     }
