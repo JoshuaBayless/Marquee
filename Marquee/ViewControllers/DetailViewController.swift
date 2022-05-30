@@ -20,24 +20,22 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var releaseDate: UILabel!
     @IBOutlet weak var contentOverview: UILabel!
     @IBOutlet weak var contentTitle: UILabel!
-    var selectedContent = Content(overview: "", poster_path: "", release_date: "", title: "", vote_average: 0.0)
-    let favoritesViewController = FavoritesViewController()
+    var selectedContent = Content(overview: "", posterPath: "", releaseDate: "", title: "", voteAverage: 0.0)
     let viewController = ViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userScore.text = "Rating: \(selectedContent.vote_average)"
-        scoreBar.progress = Float(selectedContent.vote_average*0.1)
+        userScore.text = "Rating: \(selectedContent.voteAverage)"
+        scoreBar.progress = Float(selectedContent.voteAverage*0.1)
         contentTitle.text = selectedContent.title
         contentOverview.text = selectedContent.overview
-        releaseDate.text = selectedContent.release_date
-        
-        let url = URL(string: "https://image.tmdb.org/t/p/w500/\(selectedContent.poster_path)")
+
+        releaseDate.text = selectedContent.releaseDate
+        let url = URL(string: "https://image.tmdb.org/t/p/w500/\(selectedContent.posterPath)")
         let processor = RoundCornerImageProcessor(cornerRadius: 20)
         mainPoster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])
-        
-        
+
         profilePicSetUp()
         favoritesButtonSetup(for: selectedContent)
     }
@@ -47,9 +45,7 @@ class DetailViewController: UIViewController {
         let url = Bundle.main.url(forResource: "ThanksForComing", withExtension: ".mp4")
         let player = AVPlayer(url: url!)
         let playerController = AVPlayerViewController()
-        
         playerController.player = player
-        
         present(playerController, animated: true){
             player.play()
         }
@@ -60,6 +56,7 @@ class DetailViewController: UIViewController {
         favoritesButtonSetup(for: selectedContent)
     }
     
+    //MARK: - UI Setup Methods
     func profilePicSetUp() {
         profilePic.layer.cornerRadius = profilePic.frame.size.height/2
         profilePic.layer.masksToBounds = true

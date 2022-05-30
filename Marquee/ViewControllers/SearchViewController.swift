@@ -21,8 +21,8 @@ class SearchViewController: UIViewController {
             DispatchQueue.main.async {
                 self.searchCollectionView.reloadData()
             }
-            
-        }}
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +32,16 @@ class SearchViewController: UIViewController {
         searchCollectionView.dataSource = self
         searchCollectionView.backgroundColor = .darkGray
         searchCollectionView.layer.cornerRadius = 20
-        
         profilePictureSetUp()
     }
     
     @IBAction func searchButtonPressed(_ sender: Any) {
         if searchTextField.hasText {
-        if let searchedText = searchTextField.text {
-            getSearchResults(for: searchedText)
-            searchTextField.text = ""
-        }}
+            if let searchedText = searchTextField.text {
+                getSearchResults(for: searchedText)
+                searchTextField.text = ""
+            }
+        }
     }
     
     func getSearchResults(for searchedText: String) {
@@ -55,15 +55,10 @@ class SearchViewController: UIViewController {
         }
     }
     
-    
-    
     func profilePictureSetUp() {
-        
         profilePicture.layer.cornerRadius = profilePicture.frame.size.height/2
         profilePicture.layer.masksToBounds = true
     }
-    
-    
 }
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -74,23 +69,23 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = searchCollectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.identifier, for: indexPath) as! CollectionViewCell
-        if let posterPath = searchData?[indexPath.row].poster_path {
+        let processor = RoundCornerImageProcessor(cornerRadius: 20)
+        if let posterPath = searchData?[indexPath.row].posterPath {
             let url = URL(string: "https://image.tmdb.org/t/p/w500/\(posterPath)")
-            let processor = RoundCornerImageProcessor(cornerRadius: 20)
-            cell.poster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])}
+            cell.poster.kf.setImage(with: url, placeholder: nil, options: [.processor(processor)])
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         let title = searchData?[indexPath.row].title ?? searchData?[indexPath.row].name
-        let releaseDate = searchData?[indexPath.row].first_air_date ?? searchData?[indexPath.row].release_date
+        let releaseDate = searchData?[indexPath.row].firstAirDate ?? searchData?[indexPath.row].releaseDate
         
-        let selectedItem = Content(overview: (searchData?[indexPath.row].overview)!,
-                                   poster_path: (searchData?[indexPath.row].poster_path)!,
-                                   release_date: releaseDate!,
-                                   title: title!,
-                                   vote_average: (searchData?[indexPath.row].vote_average)!)
+        let selectedItem = Content(overview: (searchData?[indexPath.row].overview) ?? "",
+                                   posterPath: (searchData?[indexPath.row].posterPath) ?? "",
+                                   releaseDate: releaseDate ?? "",
+                                   title: title ?? "",
+                                   voteAverage: (searchData?[indexPath.row].voteAverage) ?? 0)
         didSelectItem(selectedItem)
         print(selectedItem)
     }
