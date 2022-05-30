@@ -14,9 +14,9 @@ struct SearchResults: Decodable {
 struct SearchObject: Decodable {
     var name: String?
     var overview: String?
-    var poster_path: String?
-    var vote_average: Double?
-    var release_date: String?
+    var posterPath: String?
+    var voteAverage: Double?
+    var releaseDate: String?
     var title: String?
-    var first_air_date: String?
+    var firstAirDate: String?
 }

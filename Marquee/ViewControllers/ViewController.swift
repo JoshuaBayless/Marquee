@@ -11,11 +11,8 @@ import CoreData
 
 class ViewController: UIViewController {
     
-    
-    
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var tableView: UITableView!
-    
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let jsonManager = JSONManager()
@@ -25,12 +22,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         tableView.register(TableViewCell.nib(), forCellReuseIdentifier: TableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
-        
         profilePictureSetUp()
         fetchFavorites()
     }
@@ -39,20 +34,17 @@ class ViewController: UIViewController {
         getPopularMovies()
         getTVShows()
         getComingSoon()
-        
         tableView.reloadData()
     }
     
     func profilePictureSetUp() {
-        
         profilePicture.layer.cornerRadius = profilePicture.frame.size.height/2
         profilePicture.layer.masksToBounds = true
     }
 }
 
 //MARK: - Table View Methods
-
-extension ViewController:UITableViewDelegate, UITableViewDataSource, collectionViewDelegate {
+extension ViewController:UITableViewDelegate, UITableViewDataSource, CollectionViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -106,16 +98,14 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource, collectionV
     }
     
     //MARK: - Data Fetching Methods
-    
-    
     func getPopularMovies() {
         jsonManager.fetchPopularMovies { result in
-            
             switch result {
             case let .success(movieData):
                 self.movies = movieData.results
             case let .failure(error):
                 print(error)
+                    
             }
         }
     }
@@ -145,28 +135,19 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource, collectionV
         }
     }
     
-    
-    
-    
     //MARK: - CoreData Methods
-    
     func fetchFavorites() {
         do {
             FavoritesList.shared.list = try context.fetch(Favorites.fetchRequest())
-            
         } catch {
             print(error)
         }
     }
     
     func updateFavorite(at selectedContent: Content) {
-        // filter function??
         
-        //        FavoritesList.shared.list.filter { favorite in
-        //            <#code#>
-        //        }
         let info = isFavorited(selectedContent)
-        
+        print(info)
         if info.0 {
             context.delete(FavoritesList.shared.list[info.1])
             do {
@@ -177,14 +158,15 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource, collectionV
             }
             fetchFavorites()
         } else {
+            print("trying to create favorite")
             let newFavorite = Favorites(context: context)
             
             newFavorite.title = selectedContent.title
             newFavorite.overview = selectedContent.overview
-            newFavorite.poster_path = selectedContent.poster_path
-            newFavorite.release_date = selectedContent.release_date
-            newFavorite.vote_average = selectedContent.vote_average
-            
+            newFavorite.posterPath = selectedContent.posterPath
+            newFavorite.releaseDate = selectedContent.releaseDate
+            newFavorite.voteAverage = selectedContent.voteAverage
+            print(newFavorite)
             do {
                 try context.save()
                 
@@ -193,8 +175,6 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource, collectionV
             }
             fetchFavorites()
         }
-        
-        
     }
     
     func isFavorited(_ selectedContent: Content) -> (Bool,Int) {
@@ -207,6 +187,5 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource, collectionV
         }
         return (false,0)
     }
-    
 }
 
